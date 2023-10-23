@@ -45,4 +45,4 @@ Fig1 = jitter_distribution_figure(data, cats, YLabel='Y label', DistType='Gaussi
 Fig2 = jitter_distribution_figure(data, cats, YLabel='Y label', PlotType='Internal', Colors=colors)
 
 # Scatter plot 
-Fig3 = scatter_distribution_figure(datax, datay, cats, YLabel='Y label', XLabel='X label', DistType='Kernel', Colors=colors)
+Fig3 = scatter_distribution_figure(datax, datay, cats, YLabel='Y label', XLabel='X label', DistType='Kernel', Colors=colors, YLim=np.array([1.5,15]), XLim=np.array([0,7]))

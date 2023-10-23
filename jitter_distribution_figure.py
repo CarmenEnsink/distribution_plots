@@ -9,10 +9,10 @@ cats:     N x 1 list of character vectors representing the
           corresponding groups of the data points
           
 OPTIONAL INPUT
-jitter_plot(..., 'PARAM1', val1, 'PARAM2', val2, ...)
+jitter_plot(..., KWARG1 = value1, KWARG2 = value2, ...)
  
-    'Colors'       Color of the jitter plots, num of cells should 
-                   correspond to categories{[r,g,b], [r,g,b], ...}. 
+    'Colors'       Color of the jitter plots, num of rows should 
+                   correspond to categories: np.array([[r,g,b], [r,g,b], ...]). 
                    Defaults to lines colormap. 
     'Markersize'   Markersize of data points.
                    Defaults to 200.   
@@ -20,9 +20,9 @@ jitter_plot(..., 'PARAM1', val1, 'PARAM2', val2, ...)
                    Defaults to 3.  
     'Capsize'      Capsize of the mean and std plot. 
                    Defaults to 15.
-    'YLim'         Ylim [min max]
+    'YLim'         Ylim: np.array([min, max])
                    Defaults to standard lims. 
-    'YLabel'       Ylabel {str}. 
+    'YLabel'       Ylabel: string. 
                    Defaults to empty string.
     'DistType'     'Kernel' or 'Gaussian'. 
                    Defaults to Kernel. 
@@ -135,10 +135,8 @@ def jitter_distribution_figure(data=False, cats=False, **kwargs):
                 axs[1].fill_between(x=xDistribution, y1=yDistribution, y2=0, color=cols[n], alpha=0.4, edgecolor='none')
             
             # Format axis of distribution plot
-            for item,value in kwargs.items():
-                if item=='YLim':
-                    axs[1].set_ylim(y_lim)
-            axs[1].set(xticks=[], yticks=[])  
+            axs[1].sharey(axs[0])
+            axs[1].tick_params(axis='both', colors='none')
             axs[1].spines['bottom'].set_color('none')
             axs[1].spines['left'].set_color('none')
             axs[1].spines['right'].set_color('none')
