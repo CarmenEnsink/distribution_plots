@@ -20,7 +20,7 @@ Packages needed:
 
 If required, dependencies can be installed using the following command
 
-* pip install -r requirements.txt *
+*pip install -r requirements.txt*
 
 
 ![jitter_distribution_figure_example1](https://github.com/CarmenEnsink/distribution_plots/assets/61141983/1a77120b-647a-4a59-90b7-5b057521a46c)
