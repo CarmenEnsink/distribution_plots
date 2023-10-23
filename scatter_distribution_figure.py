@@ -199,40 +199,37 @@ def Distribution(data, direction, plot_type):
     xnormdis = np.arange(start=-3*std_data+mean_data, stop=3*std_data+mean_data, step=0.001)
     y_norm = stats.norm.pdf(xnormdis, mean_data, std_data)
     
-    match plot_type:
-        case 'Gaussian':
-            match direction:
-                case 'y':
-                    xDistribution = y_norm/10
-                    yDistribution = xnormdis
-                    y_norm[0] = 0
-                    y_norm[-1] = 0
-                    xPatch = y_norm/10
-                    yPatch = xnormdis
-                case 'x':
-                    xDistribution = xnormdis
-                    yDistribution = y_norm/10
-                    y_norm[0] = 0
-                    y_norm[-1] = 0
-                    xPatch = xnormdis
-                    yPatch = y_norm/10
-        case 'Kernel':
-            kde = sm.nonparametric.KDEUnivariate(data)
-            kde.fit()
-            density = kde.density
-            value = kde.support
+    if plot_type == 'Gaussian':
+        if direction == 'y':
+            xDistribution = y_norm/10
+            yDistribution = xnormdis
+            y_norm[0] = 0
+            y_norm[-1] = 0
+            xPatch = y_norm/10
+            yPatch = xnormdis
+        elif direction == 'x':
+            xDistribution = xnormdis
+            yDistribution = y_norm/10
+            y_norm[0] = 0
+            y_norm[-1] = 0
+            xPatch = xnormdis
+            yPatch = y_norm/10
+    elif plot_type == 'Kernel':
+        kde = sm.nonparametric.KDEUnivariate(data)
+        kde.fit()
+        density = kde.density
+        value = kde.support
             
-            match direction:
-                case 'y':
-                    xDistribution = density
-                    yDistribution = value
-                    xPatch = density
-                    yPatch = value
-                case 'x':
-                    xDistribution = value
-                    yDistribution = density
-                    xPatch = value
-                    yPatch = density
+        if direction == 'y':
+            xDistribution = density
+            yDistribution = value
+            xPatch = density
+            yPatch = value
+        elif direction == 'x':
+            xDistribution = value
+            yDistribution = density
+            xPatch = value
+            yPatch = density
                     
     return xDistribution, yDistribution, xPatch, yPatch
 
